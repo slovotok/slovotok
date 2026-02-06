@@ -338,6 +338,7 @@ function MainSite() {
     message: ''
   });
   const [spokenLangsOpen, setSpokenLangsOpen] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -347,6 +348,9 @@ function MainSite() {
       const target = e.target as HTMLElement;
       if (!target.closest('[data-spoken-langs-dropdown]')) {
         setSpokenLangsOpen(false);
+      }
+      if (!target.closest('[data-lang-dropdown]')) {
+        setLangDropdownOpen(false);
       }
     };
     
@@ -444,25 +448,33 @@ function MainSite() {
           {/* Language Selector & Mobile Menu */}
           <div className="flex items-center gap-2">
             {/* Language Dropdown */}
-            <div className="relative group">
-              <button className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#0a0d1a] border border-[#1a2040] hover:border-[#3b51b4] transition-all text-sm">
+            <div className="relative" data-lang-dropdown>
+              <button 
+                onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#0a0d1a] border border-[#1a2040] hover:border-[#3b51b4] transition-all text-sm cursor-pointer"
+              >
                 <span className="text-base">{langFlags[lang]}</span>
-                <svg className="w-3.5 h-3.5 text-[#6070a0]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className={`w-3.5 h-3.5 text-[#6070a0] transition-transform ${langDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
-              <div className="absolute right-0 mt-2 py-1.5 w-32 bg-[#0a0d1a] border border-[#1a2040] rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-                {(['uk', 'pl', 'ru', 'en'] as Language[]).map(l => (
-                  <button
-                    key={l}
-                    onClick={() => changeLang(l)}
-                    className={`w-full px-3 py-1.5 text-left hover:bg-[#151a30] transition-colors flex items-center gap-2 text-sm ${lang === l ? 'text-[#6b7dff]' : 'text-[#a0b0d0]'}`}
-                  >
-                    <span>{langFlags[l]}</span>
-                    <span>{l === 'uk' ? 'Українська' : l === 'pl' ? 'Polski' : l === 'ru' ? 'Русский' : 'English'}</span>
-                  </button>
-                ))}
-              </div>
+              {langDropdownOpen && (
+                <div className="absolute right-0 mt-2 py-1.5 w-32 bg-[#0a0d1a] border border-[#1a2040] rounded-xl shadow-xl z-50">
+                  {(['uk', 'pl', 'ru', 'en'] as Language[]).map(l => (
+                    <button
+                      key={l}
+                      onClick={() => {
+                        changeLang(l);
+                        setLangDropdownOpen(false);
+                      }}
+                      className={`w-full px-3 py-1.5 text-left hover:bg-[#151a30] transition-colors flex items-center gap-2 text-sm ${lang === l ? 'text-[#6b7dff]' : 'text-[#a0b0d0]'}`}
+                    >
+                      <span>{langFlags[l]}</span>
+                      <span>{l === 'uk' ? 'Українська' : l === 'pl' ? 'Polski' : l === 'ru' ? 'Русский' : 'English'}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Hamburger */}
