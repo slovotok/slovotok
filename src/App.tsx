@@ -543,20 +543,20 @@ function MainSite() {
               />
               <ServiceCard
                 icon="🇵🇱"
-                flag="EN"
+                flag="🇬🇧"
                 title={t('polishInEnglish')}
                 description={t('polishInEnglishDesc')}
                 small
               />
               <ServiceCard
                 icon="🇷🇺"
-                flag="EN"
+                flag="🇬🇧"
                 title={t('russianInEnglish')}
                 description={t('russianInEnglishDesc')}
                 small
               />
               <ServiceCard
-                icon="EN"
+                icon="🇬🇧"
                 flag="🇵🇱🇷🇺"
                 title={t('englishBasics')}
                 description={t('englishBasicsDesc')}
