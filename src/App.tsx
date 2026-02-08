@@ -274,8 +274,8 @@ function LanguageSelector({ onSelect, fadeOut }: { onSelect: (lang: Language) =>
         {/* Logo */}
         <div className="mb-10 animate-fade-in">
           <div className="inline-flex items-center justify-center mb-6">
-            <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#2b41a4] to-[#6b7dff] flex items-center justify-center text-4xl shadow-2xl shadow-[rgba(43,65,164,0.5)]">
-              💬
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2b41a4] to-[#6b7dff] flex items-center justify-center shadow-lg overflow-hidden">
+              <img src="/img_dym.png" alt="" className="w-6 h-6 object-contain" />
             </div>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-2">
